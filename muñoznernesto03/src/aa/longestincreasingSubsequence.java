@@ -3,46 +3,72 @@ package aa;
 import java.util.ArrayList;
 import java.util.Iterator;
  
-public class longestincreasingSubsequence {
-    public static void main(String[] args) {
-//        int array[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
-//        int array[] = {10, 2, 9, 3, 5, 4, 6, 8};
-        int array[] = {10, 9, 8, 6, 5, 4};
-        ArrayList list = new ArrayList();
-        ArrayList longestList = new ArrayList();
-        int currentMax;
-        int highestCount = 0;
-        for(int i = 0; i < array.length;i++)
-        {
-            currentMax = Integer.MIN_VALUE;
-            for(int j = i;j < array.length; j++)
-            {
-                if(array[j] > currentMax)
-                {
-                    list.add(array[j]);
-                    currentMax = array[j];
-                }
-            }
-             
-            //Compare previous highest subsequence
-            if(highestCount < list.size())
-            {
-                highestCount = list.size();
-                longestList = new ArrayList(list); 
-            }  
-            list.clear();
-        }
-        System.out.println();
-         
-        //Print list
-        Iterator itr = longestList.iterator();
-        System.out.println("The Longest subsequence");
-        while(itr.hasNext())
-        {
-            System.out.print(itr.next() + " ");
-        }
-        System.out.println();
-        System.out.println("Length of LIS: " + highestCount);
-    }
-     
+import java.util.*;
+
+public class GFG {
+
+ 
+// Utility function to print LIS
+static void printLIS(Vector<Integer> arr)
+{
+  for (int x : arr)
+    System.out.print(x + " ");
+  System.out.println();
 }
+ 
+// Function to conand print
+// Longest Increasing Subsequence
+static void constructPrintLIS(int arr[],
+                              int n)
+{
+  // L[i] - The longest increasing
+  // sub-sequence ends with arr[i]
+  Vector<Integer> L[] = new Vector[n];
+  for (int i = 0; i < L.length; i++)
+    L[i] = new Vector<Integer>();
+   
+  // L[0] is equal to arr[0]
+  L[0].add(arr[0]);
+ 
+  // Start from index 1
+  for (int i = 1; i < n; i++)
+  {
+    // Do for every j less than i
+    for (int j = 0; j < i; j++)
+    {
+      //L[i] = {Max(L[j])} + arr[i]
+      // where j < i and arr[j] < arr[i]
+      if ((arr[i] > arr[j]) &&
+          (L[i].size() < L[j].size() + 1))
+        L[i] = (Vector<Integer>) L[j].clone();  //deep copy
+    }
+ 
+    // L[i] ends with arr[i]
+    L[i].add(arr[i]);
+  }
+ 
+  // L[i] now stores increasing sub-sequence of
+  // arr[0..i] that ends with arr[i]
+  Vector<Integer> max = L[0];
+   
+  // LIS will be max of all increasing sub-
+  // sequences of arr
+  for (Vector<Integer> x : L)
+    if (x.size() > max.size())
+      max = x;
+ 
+  // max will contain LIS
+  printLIS(max);
+}
+ 
+// Driver function
+public static void main(String[] args)
+{
+  int arr[] = {3, 2, 4, 5, 1};
+  int n = arr.length;
+ 
+  // print LIS of arr
+  constructPrintLIS(arr, n);
+}
+}
+ 
