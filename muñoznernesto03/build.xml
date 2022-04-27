@@ -23,7 +23,7 @@
 
 <property name="dist" relative="yes" location="dist"/>
 
-<property name="mainClass" relative="yes" value="aa.Practica01"/>
+<property name="mainClass" relative="yes" value="aa.longestincreasingSubsequence"/>
 
 <!-- Define the classpath which includes the libs -->
 
