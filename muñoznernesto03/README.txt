@@ -5,4 +5,4 @@ Descripcion:
 Compilar: ant run
 Limpiar ant clean
 
-Al correr el programa nos pedira n en la consola.
+Al correr el programa nos pedira  el numero de elementos a introducir , luego nos pedira los elementos.
