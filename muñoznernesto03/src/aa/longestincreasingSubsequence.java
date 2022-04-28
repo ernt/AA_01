@@ -2,73 +2,59 @@ package aa;
 
 import java.util.ArrayList;
 import java.util.Iterator;
- 
 import java.util.*;
 
-public class GFG {
+public class longestincreasingSubsequence {
 
- 
-// Utility function to print LIS
-static void printLIS(Vector<Integer> arr)
-{
-  for (int x : arr)
+static void toString(Vector<Integer> array){
+  for (int x : array)
     System.out.print(x + " ");
-  System.out.println();
+  System.out.println( );
 }
- 
-// Function to conand print
-// Longest Increasing Subsequence
-static void constructPrintLIS(int arr[],
-                              int n)
-{
-  // L[i] - The longest increasing
-  // sub-sequence ends with arr[i]
-  Vector<Integer> L[] = new Vector[n];
-  for (int i = 0; i < L.length; i++)
-    L[i] = new Vector<Integer>();
-   
-  // L[0] is equal to arr[0]
-  L[0].add(arr[0]);
- 
-  // Start from index 1
-  for (int i = 1; i < n; i++)
-  {
-    // Do for every j less than i
-    for (int j = 0; j < i; j++)
-    {
-      //L[i] = {Max(L[j])} + arr[i]
-      // where j < i and arr[j] < arr[i]
-      if ((arr[i] > arr[j]) &&
-          (L[i].size() < L[j].size() + 1))
-        L[i] = (Vector<Integer>) L[j].clone();  //deep copy
+
+
+
+static void crealista(int array[],int n){
+  Vector<Integer> list[] = new Vector[n];
+    for (int i = 0; i < list.length; i++)
+        list[i] = new Vector<Integer>();
+
+          list[0].add(array[0]);
+
+          for (int i = 1; i < n; i++){
+            for (int j = 0; j < i; j++){
+      //list[i] = {Max(list[j])} + array[i]
+      // where j < i and array[j] < array[i]
+          if ((array[i] > array[j]) &&
+              (list[i].size() < list[j].size() + 1))
+              list[i] = (Vector<Integer>) list[j].clone();
     }
- 
-    // L[i] ends with arr[i]
-    L[i].add(arr[i]);
+
+
+                  list[i].add(array[i]);
   }
- 
-  // L[i] now stores increasing sub-sequence of
-  // arr[0..i] that ends with arr[i]
-  Vector<Integer> max = L[0];
-   
-  // LIS will be max of all increasing sub-
-  // sequences of arr
-  for (Vector<Integer> x : L)
-    if (x.size() > max.size())
-      max = x;
- 
-  // max will contain LIS
-  printLIS(max);
+
+
+      Vector<Integer> maximo = list[0];
+
+
+  for (Vector<Integer> x : list)
+    if (x.size() > maximo.size())
+      maximo = x;
+
+
+  toString(maximo);
 }
- 
-// Driver function
-public static void main(String[] args)
-{
-  int arr[] = {3, 2, 4, 5, 1};
-  int n = arr.length;
- 
-  // print LIS of arr
-  constructPrintLIS(arr, n);
+
+public static void main(String[] args){
+  Scanner scan = new Scanner(System.in);
+  System.out.println("Introduce la longitud del arreglo");
+    int n =scan.nextInt();
+  System.out.println("Introduce los elementos del arreglo");
+    int arrs[]=new int [n];
+      for (int i=0;i<n ; i++) {
+          arrs[i]=scan.nextInt();
+        }
+          crealista(arrs, n);
 }
 }
- 
